@@ -22,6 +22,11 @@ export function EventForm({ date, categories, onAdd }: EventFormProps) {
   const [repeat, setRepeat] = useState(false);
   const [repeatUntil, setRepeatUntil] = useState("");
 
+  const chips: EventCategoryOption[] =
+    selected && !categories.some((category) => category.name === selected.name)
+      ? [selected, ...categories]
+      : categories;
+
   function confirmNewCategory() {
     const trimmed = newName.trim();
     if (!trimmed) return;
@@ -92,7 +97,7 @@ export function EventForm({ date, categories, onAdd }: EventFormProps) {
           >
             없음
           </button>
-          {categories.map((category) => {
+          {chips.map((category) => {
             const active = selected?.name === category.name;
             return (
               <button
