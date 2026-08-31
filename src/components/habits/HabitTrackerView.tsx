@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { HabitAnalysisTable } from "./HabitAnalysisTable";
 import { HabitDonutChart } from "./HabitDonutChart";
 import { HabitGrid } from "./HabitGrid";
 import { HabitMonthNav } from "./HabitMonthNav";
@@ -90,11 +89,6 @@ export function HabitTrackerView() {
         <Card>
           <CardHeader title="Overall Stats" description="이번 달 전체 달성률" />
           <HabitDonutChart percent={stats.overallPercent} />
-        </Card>
-
-        <Card>
-          <CardHeader title="Analysis" description="습관별 달성 현황" />
-          <HabitAnalysisTable stats={stats.perHabitStats} />
         </Card>
       </div>
     </div>

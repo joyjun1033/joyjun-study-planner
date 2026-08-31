@@ -47,12 +47,16 @@ model Goal {
 }
 
 model ExamEvent {
-  id      String @id @default(cuid())
-  userId  String
-  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  date    String
-  title   String
-  subject String
+  id       String @id @default(cuid())
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date     String
+  title    String
+  subject  String
+  /** 활동 종류 이름 (예: 시험, 동아리) — 같은 이름은 같은 색으로 표시한다 */
+  category String @default("")
+  /** 종류별 표시 색 (hex) */
+  color    String @default("#94A3B8")
 
   @@index([userId, date])
 }

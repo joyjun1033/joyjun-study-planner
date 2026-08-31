@@ -57,8 +57,28 @@ export interface ExamEvent {
   id: string;
   date: DateKey;
   title: string;
+  /** 메모(선택) — 과목, 장소 등 자유 입력 */
   subject: string;
+  /** 활동 종류 이름 (예: 시험, 동아리). 빈 문자열이면 종류 미지정 */
+  category: string;
+  /** 종류별 표시 색 (hex) */
+  color: string;
 }
+
+/** 새 일정에 쓸 수 있는 종류별 색상 팔레트 */
+export const EVENT_COLOR_PALETTE = [
+  "#7C3AED",
+  "#10B981",
+  "#2563EB",
+  "#F59E0B",
+  "#EC4899",
+  "#EF4444",
+  "#0EA5E9",
+  "#64748B",
+];
+
+/** 종류가 없는 일정에 쓰는 기본 색 */
+export const EVENT_DEFAULT_COLOR = "#94A3B8";
 
 export interface Grade {
   id: string;

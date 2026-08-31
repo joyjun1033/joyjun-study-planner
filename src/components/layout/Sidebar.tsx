@@ -20,7 +20,7 @@ import { daysUntil } from "@/lib/date";
 
 const NAV_ITEMS = [
   { href: "/", label: "대시보드", icon: LayoutDashboard },
-  { href: "/schedule", label: "시험 일정", icon: CalendarDays },
+  { href: "/schedule", label: "일정", icon: CalendarDays },
   { href: "/grades", label: "시험 성적", icon: GraduationCap },
   { href: "/habits", label: "습관 트래커", icon: ListChecks },
   { href: "/screentime", label: "스크린타임", icon: Smartphone },

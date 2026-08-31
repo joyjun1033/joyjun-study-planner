@@ -4,22 +4,22 @@ import { useState } from "react";
 import { MonthCalendar } from "./MonthCalendar";
 import { EventForm } from "./EventForm";
 import { EventList } from "./EventList";
-import { Card } from "@/components/ui/Card";
+import { Modal } from "@/components/ui/Modal";
 import { useEvents } from "@/hooks/useEvents";
 import { useToday } from "@/hooks/useToday";
 import { daysUntil, formatFullDate, fromDateKey } from "@/lib/date";
 
 export function ScheduleView() {
   const today = useToday();
-  const [selected, setSelected] = useState(today);
+  const [popupDate, setPopupDate] = useState<string | null>(null);
   const [cursor, setCursor] = useState(() => {
     const date = fromDateKey(today);
     return { year: date.getFullYear(), month: date.getMonth() };
   });
 
-  const { countByDate, eventsOn, addEvent, removeEvent } = useEvents();
-  const dayEvents = eventsOn(selected);
-  const dday = daysUntil(selected);
+  const { dotsByDate, categories, eventsOn, addEvent, removeEvent } = useEvents();
+  const dayEvents = popupDate ? eventsOn(popupDate) : [];
+  const dday = popupDate ? daysUntil(popupDate) : 0;
 
   function moveMonth(delta: number) {
     setCursor(({ year, month }) => {
@@ -29,18 +29,12 @@ export function ScheduleView() {
   }
 
   function selectDate(date: string) {
-    setSelected(date);
-    // 이전/다음 달 날짜를 눌렀다면 달력도 그 달로 따라간다
-    const target = fromDateKey(date);
-    if (target.getFullYear() !== cursor.year || target.getMonth() !== cursor.month) {
-      setCursor({ year: target.getFullYear(), month: target.getMonth() });
-    }
+    setPopupDate(date);
   }
 
   function goToday() {
     const date = fromDateKey(today);
     setCursor({ year: date.getFullYear(), month: date.getMonth() });
-    setSelected(today);
   }
 
   return (
@@ -48,20 +42,17 @@ export function ScheduleView() {
       <MonthCalendar
         year={cursor.year}
         month={cursor.month}
-        selected={selected}
+        selected={popupDate ?? ""}
         today={today}
-        countByDate={countByDate}
+        dotsByDate={dotsByDate}
         onSelect={selectDate}
         onMoveMonth={moveMonth}
         onToday={goToday}
       />
 
-      <Card>
-        <header className="mb-5 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5">
-            <h2 className="tnum text-base font-semibold text-slate-900 dark:text-slate-100">
-              {formatFullDate(selected)}
-            </h2>
+      {popupDate ? (
+        <Modal title={formatFullDate(popupDate)} onClose={() => setPopupDate(null)}>
+          <div className="mb-5 flex items-center justify-between gap-4">
             {dday > 0 ? (
               <span className="tnum rounded-full bg-brand-50 px-2.5 py-1 text-xs font-semibold text-brand-700 dark:bg-brand-500/10 dark:text-brand-400">
                 D-{dday}
@@ -70,21 +61,27 @@ export function ScheduleView() {
               <span className="rounded-full bg-brand-600 px-2.5 py-1 text-xs font-semibold text-white">
                 D-DAY
               </span>
-            ) : null}
+            ) : (
+              <span />
+            )}
+            <span className="tnum text-sm text-slate-400 dark:text-slate-500">
+              일정 {dayEvents.length}개
+            </span>
           </div>
-          <span className="tnum text-sm text-slate-400 dark:text-slate-500">
-            일정 {dayEvents.length}개
-          </span>
-        </header>
 
-        <div className="mb-6">
-          <EventList events={dayEvents} onRemove={removeEvent} />
-        </div>
+          <div className="mb-6">
+            <EventList events={dayEvents} onRemove={removeEvent} />
+          </div>
 
-        <div className="border-t border-slate-100 pt-5 dark:border-slate-800">
-          <EventForm onAdd={(title, subject) => addEvent(selected, title, subject)} />
-        </div>
-      </Card>
+          <div className="border-t border-slate-100 pt-5 dark:border-slate-800">
+            <EventForm
+              date={popupDate}
+              categories={categories}
+              onAdd={(input) => addEvent(popupDate, input)}
+            />
+          </div>
+        </Modal>
+      ) : null}
     </div>
   );
 }

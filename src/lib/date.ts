@@ -71,6 +71,17 @@ export function daysUntil(key: DateKey): number {
   return Math.round((target - today) / 86_400_000);
 }
 
+/** 매주 반복 일정의 발생일 목록을 만든다 (start부터 until까지 7일 간격, 최대 104회) */
+export function buildWeeklyOccurrences(start: DateKey, until: DateKey): DateKey[] {
+  const dates: DateKey[] = [];
+  let cursor = start;
+  while (cursor <= until && dates.length < 104) {
+    dates.push(cursor);
+    cursor = addDays(cursor, 7);
+  }
+  return dates;
+}
+
 /** "YYYY-MM" 월 키 */
 export function toMonthKey(year: number, month: number): string {
   return `${year}-${String(month + 1).padStart(2, "0")}`;

@@ -10,19 +10,21 @@ interface MonthCalendarProps {
   month: number;
   selected: DateKey;
   today: DateKey;
-  /** 날짜별 일정 개수 — 점(dot) 표시에 사용 */
-  countByDate: Record<DateKey, number>;
+  /** 날짜별 일정 색 목록(종류별, 중복 제거) — 점(dot) 표시에 사용 */
+  dotsByDate: Record<DateKey, string[]>;
   onSelect: (date: DateKey) => void;
   onMoveMonth: (delta: number) => void;
   onToday: () => void;
 }
+
+const MAX_DOTS = 4;
 
 export function MonthCalendar({
   year,
   month,
   selected,
   today,
-  countByDate,
+  dotsByDate,
   onSelect,
   onMoveMonth,
   onToday,
@@ -73,7 +75,7 @@ export function MonthCalendar({
         {cells.map((cell) => {
           const isSelected = cell.key === selected;
           const isToday = cell.key === today;
-          const hasEvent = (countByDate[cell.key] ?? 0) > 0;
+          const dots = (dotsByDate[cell.key] ?? []).slice(0, MAX_DOTS);
 
           return (
             <div key={cell.key} className="flex justify-center">
@@ -98,16 +100,18 @@ export function MonthCalendar({
                 )}
               >
                 <span>{cell.day}</span>
-                <span
-                  className={cn(
-                    "absolute bottom-2 h-1 w-1 rounded-full",
-                    hasEvent
-                      ? isSelected
-                        ? "bg-white"
-                        : "bg-brand-500"
-                      : "bg-transparent"
-                  )}
-                />
+                <span className="absolute bottom-2 flex items-center gap-0.5">
+                  {dots.map((color, index) => (
+                    <span
+                      key={index}
+                      className={cn(
+                        "h-1 w-1 rounded-full",
+                        isSelected && "ring-1 ring-white/60"
+                      )}
+                      style={{ backgroundColor: isSelected ? "#FFFFFF" : color }}
+                    />
+                  ))}
+                </span>
               </button>
             </div>
           );
