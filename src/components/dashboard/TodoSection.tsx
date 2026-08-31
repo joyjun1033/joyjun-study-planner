@@ -30,10 +30,10 @@ export function TodoSection() {
     <Card>
       <header className="mb-5 flex items-start justify-between gap-4">
         <div>
-          <h2 className="text-base font-semibold text-slate-900">
+          <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">
             {isToday ? "오늘 할 일" : "지난 기록"}
           </h2>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             {todos.length === 0 ? (
               "아직 등록된 할 일이 없습니다"
             ) : (
@@ -41,7 +41,7 @@ export function TodoSection() {
                 <span className="tnum font-semibold text-brand-600">
                   {doneCount}/{todos.length} 완료
                 </span>
-                <span className="tnum text-slate-400"> · {percent}%</span>
+                <span className="tnum text-slate-400 dark:text-slate-500"> · {percent}%</span>
               </>
             )}
           </p>

@@ -25,7 +25,11 @@ export function ScreenTimeView() {
         <CardHeader
           title="기록"
           description="최신순으로 정렬됩니다."
-          action={<span className="tnum text-sm text-slate-400">{sortedDates.length}건</span>}
+          action={
+            <span className="tnum text-sm text-slate-400 dark:text-slate-500">
+              {sortedDates.length}건
+            </span>
+          }
         />
         <ScreenTimeTable dates={sortedDates} minutesByDate={entries} onRemove={removeEntry} />
       </Card>

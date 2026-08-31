@@ -32,9 +32,11 @@ export function HabitProgressChart({ weeklyStats }: HabitProgressChartProps) {
             if (!active || !payload || payload.length === 0) return null;
             const point = payload[0].payload as WeekStat;
             return (
-              <div className="rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 shadow-card">
-                <p className="mb-1 text-xs font-semibold text-slate-500">{point.label}</p>
-                <p className="tnum text-sm font-semibold text-slate-900">
+              <div className="rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 shadow-card dark:border-slate-700 dark:bg-slate-800">
+                <p className="mb-1 text-xs font-semibold text-slate-500 dark:text-slate-400">
+                  {point.label}
+                </p>
+                <p className="tnum text-sm font-semibold text-slate-900 dark:text-slate-100">
                   {point.done}/{point.possible} · {point.percent}%
                 </p>
               </div>

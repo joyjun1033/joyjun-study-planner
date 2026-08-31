@@ -45,7 +45,7 @@ export function GradeChart({ grades }: GradeChartProps) {
 
   if (availableTypes.length === 0) {
     return (
-      <p className="py-10 text-center text-sm text-slate-400">
+      <p className="py-10 text-center text-sm text-slate-400 dark:text-slate-500">
         성적을 입력하면 과목별 추이가 그려집니다
       </p>
     );
@@ -89,7 +89,10 @@ export function GradeChart({ grades }: GradeChartProps) {
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           {shown.length >= 2 ? (
             shown.map((subject, index) => (
-              <span key={subject} className="flex items-center gap-1.5 text-xs text-slate-500">
+              <span
+                key={subject}
+                className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400"
+              >
                 <span
                   className="h-2 w-2 rounded-full"
                   style={{ backgroundColor: SERIES_COLORS[index] }}
@@ -98,12 +101,14 @@ export function GradeChart({ grades }: GradeChartProps) {
               </span>
             ))
           ) : shown.length === 1 ? (
-            <span className="text-xs font-medium text-slate-500">{shown[0]} 추이</span>
+            <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
+              {shown[0]} 추이
+            </span>
           ) : null}
         </div>
 
         {availableTypes.length > 1 ? (
-          <div className="inline-flex shrink-0 rounded-full border border-slate-200 p-0.5">
+          <div className="inline-flex shrink-0 rounded-full border border-slate-200 p-0.5 dark:border-slate-700">
             {availableTypes.map((type) => (
               <button
                 key={type}
@@ -113,7 +118,7 @@ export function GradeChart({ grades }: GradeChartProps) {
                   "rounded-full px-3 py-1 text-xs font-medium transition-colors",
                   scoreType === type
                     ? "bg-brand-600 text-white"
-                    : "text-slate-500 hover:text-slate-900"
+                    : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
                 )}
               >
                 {type === "score" ? "점수" : "등급"}
@@ -124,7 +129,7 @@ export function GradeChart({ grades }: GradeChartProps) {
       </div>
 
       {scoped.length < 2 ? (
-        <p className="py-10 text-center text-sm text-slate-400">
+        <p className="py-10 text-center text-sm text-slate-400 dark:text-slate-500">
           기록이 2개 이상 쌓이면 추이가 표시됩니다
         </p>
       ) : (
@@ -152,8 +157,8 @@ export function GradeChart({ grades }: GradeChartProps) {
               content={({ active, payload, label }) => {
                 if (!active || !payload || payload.length === 0) return null;
                 return (
-                  <div className="rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 shadow-card">
-                    <p className="tnum mb-1.5 text-xs font-semibold text-slate-500">
+                  <div className="rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 shadow-card dark:border-slate-700 dark:bg-slate-800">
+                    <p className="tnum mb-1.5 text-xs font-semibold text-slate-500 dark:text-slate-400">
                       {String(label)}
                     </p>
                     {payload
@@ -161,14 +166,14 @@ export function GradeChart({ grades }: GradeChartProps) {
                       .map((entry) => (
                         <p
                           key={String(entry.dataKey)}
-                          className="flex items-center gap-2 text-xs text-slate-700"
+                          className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300"
                         >
                           <span
                             className="h-2 w-2 rounded-full"
                             style={{ backgroundColor: entry.color }}
                           />
                           <span className="flex-1">{entry.name}</span>
-                          <span className="tnum font-semibold text-slate-900">
+                          <span className="tnum font-semibold text-slate-900 dark:text-slate-100">
                             {entry.value}
                             {unit}
                           </span>
@@ -217,7 +222,7 @@ export function GradeChart({ grades }: GradeChartProps) {
       )}
 
       {hiddenCount > 0 ? (
-        <p className="mt-3 text-xs text-slate-400">
+        <p className="mt-3 text-xs text-slate-400 dark:text-slate-500">
           과목이 많아 {shown.length}개만 표시했습니다. 나머지 {hiddenCount}개 과목은 위 필터에서
           선택해 확인하세요.
         </p>

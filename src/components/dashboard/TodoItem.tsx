@@ -12,7 +12,7 @@ interface TodoItemProps {
 
 export function TodoItem({ todo, onToggle, onRemove }: TodoItemProps) {
   return (
-    <li className="group flex items-center gap-3 rounded-xl px-2 py-2.5 transition-colors hover:bg-slate-50">
+    <li className="group flex items-center gap-3 rounded-xl px-2 py-2.5 transition-colors hover:bg-slate-50 dark:hover:bg-slate-800">
       <button
         type="button"
         role="checkbox"
@@ -23,7 +23,7 @@ export function TodoItem({ todo, onToggle, onRemove }: TodoItemProps) {
           "flex h-5 w-5 shrink-0 items-center justify-center rounded-md border transition-colors",
           todo.done
             ? "border-brand-600 bg-brand-600 text-white"
-            : "border-slate-300 bg-white hover:border-brand-400"
+            : "border-slate-300 bg-white hover:border-brand-400 dark:border-slate-600 dark:bg-slate-900"
         )}
       >
         {todo.done ? <Check size={13} strokeWidth={3} /> : null}
@@ -32,7 +32,9 @@ export function TodoItem({ todo, onToggle, onRemove }: TodoItemProps) {
       <span
         className={cn(
           "flex-1 text-sm transition-colors",
-          todo.done ? "text-slate-400 line-through" : "text-slate-700"
+          todo.done
+            ? "text-slate-400 line-through dark:text-slate-600"
+            : "text-slate-700 dark:text-slate-200"
         )}
       >
         {todo.text}
@@ -42,7 +44,7 @@ export function TodoItem({ todo, onToggle, onRemove }: TodoItemProps) {
         type="button"
         aria-label="삭제"
         onClick={() => onRemove(todo.id)}
-        className="rounded-full p-1 text-slate-300 opacity-0 transition hover:bg-slate-100 hover:text-slate-500 focus:opacity-100 group-hover:opacity-100"
+        className="rounded-full p-1 text-slate-300 opacity-0 transition hover:bg-slate-100 hover:text-slate-500 focus:opacity-100 group-hover:opacity-100 dark:text-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-300"
       >
         <X size={15} />
       </button>

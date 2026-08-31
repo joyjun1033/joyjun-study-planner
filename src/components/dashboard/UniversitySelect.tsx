@@ -84,7 +84,7 @@ export function UniversitySelect({ value, onChange }: UniversitySelectProps) {
     return (
       <div>
         <div className="flex items-start gap-2">
-          <p className="flex-1 text-[15px] font-semibold leading-relaxed text-slate-900">
+          <p className="flex-1 text-[15px] font-semibold leading-relaxed text-slate-900 dark:text-slate-100">
             {value}
           </p>
           <button
@@ -94,7 +94,7 @@ export function UniversitySelect({ value, onChange }: UniversitySelectProps) {
               onChange("");
               setQuery("");
             }}
-            className="mt-0.5 shrink-0 rounded-full p-1 text-slate-300 transition-colors hover:bg-slate-100 hover:text-slate-500"
+            className="mt-0.5 shrink-0 rounded-full p-1 text-slate-300 transition-colors hover:bg-slate-100 hover:text-slate-500 dark:text-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-300"
           >
             <X size={15} />
           </button>
@@ -118,8 +118,8 @@ export function UniversitySelect({ value, onChange }: UniversitySelectProps) {
 
   return (
     <div ref={containerRef} className="relative">
-      <div className="flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-2 focus-within:border-brand-400 focus-within:ring-2 focus-within:ring-brand-100">
-        <Search size={15} className="shrink-0 text-slate-300" />
+      <div className="flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-2 focus-within:border-brand-400 focus-within:ring-2 focus-within:ring-brand-100 dark:border-slate-700">
+        <Search size={15} className="shrink-0 text-slate-300 dark:text-slate-600" />
         <input
           value={query}
           onChange={(event) => {
@@ -133,7 +133,7 @@ export function UniversitySelect({ value, onChange }: UniversitySelectProps) {
           aria-expanded={open}
           role="combobox"
           aria-controls="university-listbox"
-          className="w-full bg-transparent text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none"
+          className="w-full bg-transparent text-sm text-slate-900 placeholder:text-slate-300 focus:outline-none dark:text-slate-100 dark:placeholder:text-slate-600"
         />
       </div>
 
@@ -141,7 +141,7 @@ export function UniversitySelect({ value, onChange }: UniversitySelectProps) {
         <ul
           id="university-listbox"
           role="listbox"
-          className="absolute left-0 right-0 top-full z-20 mt-2 max-h-60 overflow-y-auto rounded-xl border border-slate-200 bg-white py-1 shadow-lg"
+          className="absolute left-0 right-0 top-full z-20 mt-2 max-h-60 overflow-y-auto rounded-xl border border-slate-200 bg-white py-1 shadow-lg dark:border-slate-700 dark:bg-slate-800"
         >
           {matches.map((name, index) => (
             <li key={name}>
@@ -155,8 +155,8 @@ export function UniversitySelect({ value, onChange }: UniversitySelectProps) {
                 className={cn(
                   "w-full px-3.5 py-2 text-left text-sm transition-colors",
                   index === activeIndex
-                    ? "bg-brand-50 font-medium text-brand-700"
-                    : "text-slate-600"
+                    ? "bg-brand-50 font-medium text-brand-700 dark:bg-brand-500/10 dark:text-brand-400"
+                    : "text-slate-600 dark:text-slate-300"
                 )}
               >
                 {name}
@@ -174,20 +174,22 @@ export function UniversitySelect({ value, onChange }: UniversitySelectProps) {
                 onMouseEnter={() => setActiveIndex(matches.length)}
                 onClick={() => select(trimmed)}
                 className={cn(
-                  "w-full border-t border-slate-100 px-3.5 py-2 text-left text-sm transition-colors",
+                  "w-full border-t border-slate-100 px-3.5 py-2 text-left text-sm transition-colors dark:border-slate-700",
                   activeIndex === matches.length
-                    ? "bg-brand-50 text-brand-700"
-                    : "text-slate-500"
+                    ? "bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-brand-400"
+                    : "text-slate-500 dark:text-slate-400"
                 )}
               >
-                <span className="font-medium text-slate-900">{trimmed}</span>
+                <span className="font-medium text-slate-900 dark:text-slate-100">{trimmed}</span>
                 <span className="ml-1.5 text-xs">직접 입력</span>
               </button>
             </li>
           ) : null}
 
           {optionCount === 0 ? (
-            <li className="px-3.5 py-3 text-sm text-slate-400">검색 결과가 없습니다</li>
+            <li className="px-3.5 py-3 text-sm text-slate-400 dark:text-slate-500">
+              검색 결과가 없습니다
+            </li>
           ) : null}
         </ul>
       ) : null}

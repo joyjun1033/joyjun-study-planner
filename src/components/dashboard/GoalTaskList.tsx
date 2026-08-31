@@ -42,7 +42,7 @@ export function GoalTaskList({ tasks, onChange, placeholder }: GoalTaskListProps
           <span
             className={cn(
               "tnum w-4 shrink-0 text-right text-xs font-semibold",
-              task.done ? "text-slate-300" : "text-slate-400"
+              task.done ? "text-slate-300 dark:text-slate-600" : "text-slate-400 dark:text-slate-500"
             )}
           >
             {index + 1}.
@@ -58,7 +58,7 @@ export function GoalTaskList({ tasks, onChange, placeholder }: GoalTaskListProps
               "flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors",
               task.done
                 ? "border-brand-600 bg-brand-600 text-white"
-                : "border-slate-300 bg-white hover:border-brand-400"
+                : "border-slate-300 bg-white hover:border-brand-400 dark:border-slate-600 dark:bg-slate-900"
             )}
           >
             {task.done ? <Check size={11} strokeWidth={3} /> : null}
@@ -75,7 +75,9 @@ export function GoalTaskList({ tasks, onChange, placeholder }: GoalTaskListProps
             aria-label={`${index + 1}번 목표`}
             className={cn(
               "min-w-0 flex-1 border-0 bg-transparent px-0 py-1 text-sm focus:outline-none",
-              task.done ? "text-slate-400 line-through" : "text-slate-700"
+              task.done
+                ? "text-slate-400 line-through dark:text-slate-600"
+                : "text-slate-700 dark:text-slate-200"
             )}
           />
 
@@ -83,7 +85,7 @@ export function GoalTaskList({ tasks, onChange, placeholder }: GoalTaskListProps
             type="button"
             aria-label="항목 삭제"
             onClick={() => removeTask(task.id)}
-            className="shrink-0 rounded-full p-0.5 text-slate-300 opacity-0 transition hover:bg-slate-100 hover:text-slate-500 focus:opacity-100 group-hover:opacity-100"
+            className="shrink-0 rounded-full p-0.5 text-slate-300 opacity-0 transition hover:bg-slate-100 hover:text-slate-500 focus:opacity-100 group-hover:opacity-100 dark:text-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-300"
           >
             <X size={14} />
           </button>
@@ -91,10 +93,10 @@ export function GoalTaskList({ tasks, onChange, placeholder }: GoalTaskListProps
       ))}
 
       <li className="flex items-center gap-2">
-        <span className="tnum w-4 shrink-0 text-right text-xs font-semibold text-slate-300">
+        <span className="tnum w-4 shrink-0 text-right text-xs font-semibold text-slate-300 dark:text-slate-600">
           {tasks.length + 1}.
         </span>
-        <span className="h-4 w-4 shrink-0 rounded border border-dashed border-slate-200" />
+        <span className="h-4 w-4 shrink-0 rounded border border-dashed border-slate-200 dark:border-slate-700" />
         <input
           ref={draftRef}
           value={draft}
@@ -107,7 +109,7 @@ export function GoalTaskList({ tasks, onChange, placeholder }: GoalTaskListProps
           onBlur={addFromDraft}
           placeholder={placeholder ?? "입력 후 Enter"}
           aria-label="목표 항목 추가"
-          className="min-w-0 flex-1 border-0 bg-transparent px-0 py-1 text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none"
+          className="min-w-0 flex-1 border-0 bg-transparent px-0 py-1 text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none dark:text-slate-200 dark:placeholder:text-slate-600"
         />
       </li>
     </ol>
@@ -125,13 +127,13 @@ export function TaskProgress({ tasks }: TaskProgressProps) {
 
   return (
     <div className="flex items-center gap-3">
-      <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100">
+      <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
         <div
           className="h-full rounded-full bg-brand-500 transition-[width] duration-300"
           style={{ width: `${percent}%` }}
         />
       </div>
-      <span className="tnum shrink-0 text-xs font-semibold text-slate-500">
+      <span className="tnum shrink-0 text-xs font-semibold text-slate-500 dark:text-slate-400">
         {done}/{tasks.length} 달성
       </span>
     </div>

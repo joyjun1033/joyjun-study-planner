@@ -53,7 +53,7 @@ export default function SignupPage() {
           <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-600 text-base font-bold text-white">
             S
           </span>
-          <h1 className="text-lg font-bold text-slate-900">회원가입</h1>
+          <h1 className="text-lg font-bold text-slate-900 dark:text-slate-100">회원가입</h1>
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -87,7 +87,9 @@ export default function SignupPage() {
           <div>
             <label className="label" htmlFor="signup-password">
               비밀번호
-              <span className="ml-1 font-normal text-slate-400">(8자 이상)</span>
+              <span className="ml-1 font-normal text-slate-400 dark:text-slate-500">
+                (8자 이상)
+              </span>
             </label>
             <input
               id="signup-password"
@@ -101,7 +103,7 @@ export default function SignupPage() {
             />
           </div>
 
-          {error ? <p className="text-sm text-red-500">{error}</p> : null}
+          {error ? <p className="text-sm text-red-500 dark:text-red-400">{error}</p> : null}
 
           <button
             type="submit"
@@ -112,7 +114,7 @@ export default function SignupPage() {
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-slate-500">
+        <p className="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">
           이미 계정이 있으신가요?{" "}
           <Link href="/login" className="font-semibold text-brand-600 hover:underline">
             로그인

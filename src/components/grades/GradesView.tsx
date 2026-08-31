@@ -49,7 +49,9 @@ export function GradesView() {
           title="성적 기록"
           description="최신순으로 정렬됩니다."
           action={
-            <span className="tnum text-sm text-slate-400">{filtered.length}건</span>
+            <span className="tnum text-sm text-slate-400 dark:text-slate-500">
+              {filtered.length}건
+            </span>
           }
         />
         {subjects.length > 0 ? (

@@ -59,11 +59,11 @@ export function ScheduleView() {
       <Card>
         <header className="mb-5 flex items-center justify-between gap-4">
           <div className="flex items-center gap-2.5">
-            <h2 className="tnum text-base font-semibold text-slate-900">
+            <h2 className="tnum text-base font-semibold text-slate-900 dark:text-slate-100">
               {formatFullDate(selected)}
             </h2>
             {dday > 0 ? (
-              <span className="tnum rounded-full bg-brand-50 px-2.5 py-1 text-xs font-semibold text-brand-700">
+              <span className="tnum rounded-full bg-brand-50 px-2.5 py-1 text-xs font-semibold text-brand-700 dark:bg-brand-500/10 dark:text-brand-400">
                 D-{dday}
               </span>
             ) : dday === 0 ? (
@@ -72,14 +72,16 @@ export function ScheduleView() {
               </span>
             ) : null}
           </div>
-          <span className="tnum text-sm text-slate-400">일정 {dayEvents.length}개</span>
+          <span className="tnum text-sm text-slate-400 dark:text-slate-500">
+            일정 {dayEvents.length}개
+          </span>
         </header>
 
         <div className="mb-6">
           <EventList events={dayEvents} onRemove={removeEvent} />
         </div>
 
-        <div className="border-t border-slate-100 pt-5">
+        <div className="border-t border-slate-100 pt-5 dark:border-slate-800">
           <EventForm onAdd={(title, subject) => addEvent(selected, title, subject)} />
         </div>
       </Card>

@@ -32,7 +32,7 @@ export function MonthCalendar({
   return (
     <div className="card p-6">
       <header className="mb-6 flex items-center justify-between">
-        <h2 className="tnum text-lg font-bold tracking-tight text-slate-900">
+        <h2 className="tnum text-lg font-bold tracking-tight text-slate-900 dark:text-slate-100">
           {formatMonthLabel(year, month)}
         </h2>
         <div className="flex items-center gap-2">
@@ -43,7 +43,7 @@ export function MonthCalendar({
             type="button"
             aria-label="이전 달"
             onClick={() => onMoveMonth(-1)}
-            className="rounded-full border border-slate-200 p-1.5 text-slate-500 transition-colors hover:bg-slate-50"
+            className="rounded-full border border-slate-200 p-1.5 text-slate-500 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-800"
           >
             <ChevronLeft size={16} />
           </button>
@@ -51,7 +51,7 @@ export function MonthCalendar({
             type="button"
             aria-label="다음 달"
             onClick={() => onMoveMonth(1)}
-            className="rounded-full border border-slate-200 p-1.5 text-slate-500 transition-colors hover:bg-slate-50"
+            className="rounded-full border border-slate-200 p-1.5 text-slate-500 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-800"
           >
             <ChevronRight size={16} />
           </button>
@@ -60,7 +60,10 @@ export function MonthCalendar({
 
       <div className="mb-2 grid grid-cols-7">
         {WEEKDAY_LABELS.map((label) => (
-          <div key={label} className="py-1 text-center text-xs font-medium text-slate-400">
+          <div
+            key={label}
+            className="py-1 text-center text-xs font-medium text-slate-400 dark:text-slate-500"
+          >
             {label}
           </div>
         ))}
@@ -82,10 +85,16 @@ export function MonthCalendar({
                 className={cn(
                   "tnum relative flex h-11 w-11 flex-col items-center justify-center rounded-full text-sm transition-colors",
                   isSelected && "bg-brand-600 font-semibold text-white",
-                  !isSelected && isToday && "bg-brand-50 font-bold text-brand-600",
-                  !isSelected && !isToday && cell.inCurrentMonth &&
-                    "font-medium text-slate-700 hover:bg-slate-100",
-                  !isSelected && !cell.inCurrentMonth && "text-slate-300 hover:bg-slate-50"
+                  !isSelected &&
+                    isToday &&
+                    "bg-brand-50 font-bold text-brand-600 dark:bg-brand-500/10 dark:text-brand-400",
+                  !isSelected &&
+                    !isToday &&
+                    cell.inCurrentMonth &&
+                    "font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800",
+                  !isSelected &&
+                    !cell.inCurrentMonth &&
+                    "text-slate-300 hover:bg-slate-50 dark:text-slate-700 dark:hover:bg-slate-800"
                 )}
               >
                 <span>{cell.day}</span>

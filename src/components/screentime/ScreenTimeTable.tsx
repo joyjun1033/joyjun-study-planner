@@ -26,7 +26,7 @@ export function ScreenTimeTable({ dates, minutesByDate, onRemove }: ScreenTimeTa
   return (
     <table className="w-full text-sm">
       <thead>
-        <tr className="border-b border-slate-100 text-left text-xs font-medium text-slate-400">
+        <tr className="border-b border-slate-100 text-left text-xs font-medium text-slate-400 dark:border-slate-800 dark:text-slate-500">
           <th className="pb-3 pl-2 font-medium">날짜</th>
           <th className="pb-3 text-right font-medium">스크린타임</th>
           <th className="w-10 pb-3" />
@@ -34,9 +34,14 @@ export function ScreenTimeTable({ dates, minutesByDate, onRemove }: ScreenTimeTa
       </thead>
       <tbody>
         {dates.map((date) => (
-          <tr key={date} className="group border-b border-slate-50 last:border-0">
-            <td className="tnum py-3.5 pl-2 text-slate-500">{formatShortDate(date)}</td>
-            <td className="tnum py-3.5 text-right font-semibold text-slate-900">
+          <tr
+            key={date}
+            className="group border-b border-slate-50 last:border-0 dark:border-slate-800"
+          >
+            <td className="tnum py-3.5 pl-2 text-slate-500 dark:text-slate-400">
+              {formatShortDate(date)}
+            </td>
+            <td className="tnum py-3.5 text-right font-semibold text-slate-900 dark:text-slate-100">
               {formatMinutes(minutesByDate[date])}
             </td>
             <td className="py-3.5 text-right">
@@ -44,7 +49,7 @@ export function ScreenTimeTable({ dates, minutesByDate, onRemove }: ScreenTimeTa
                 type="button"
                 aria-label="스크린타임 기록 삭제"
                 onClick={() => onRemove(date)}
-                className="rounded-full p-1 text-slate-300 opacity-0 transition hover:bg-slate-100 hover:text-slate-500 focus:opacity-100 group-hover:opacity-100"
+                className="rounded-full p-1 text-slate-300 opacity-0 transition hover:bg-slate-100 hover:text-slate-500 focus:opacity-100 group-hover:opacity-100 dark:text-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-300"
               >
                 <X size={15} />
               </button>

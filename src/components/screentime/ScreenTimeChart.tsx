@@ -63,19 +63,23 @@ export function ScreenTimeChart({ entries }: ScreenTimeChartProps) {
   return (
     <div>
       <div className="mb-4 flex items-center justify-between gap-4">
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-slate-500 dark:text-slate-400">
           {recorded.length > 0 ? (
             <>
               {RANGE_OPTIONS.find((o) => o.value === mode)?.label} 평균{" "}
-              <span className="font-semibold text-slate-900">{formatMinutes(average)}</span>
-              <span className="ml-1.5 text-xs text-slate-400">(기록 {recorded.length}일)</span>
+              <span className="font-semibold text-slate-900 dark:text-slate-100">
+                {formatMinutes(average)}
+              </span>
+              <span className="ml-1.5 text-xs text-slate-400 dark:text-slate-500">
+                (기록 {recorded.length}일)
+              </span>
             </>
           ) : (
             "이 기간에 기록된 스크린타임이 없습니다"
           )}
         </p>
 
-        <div className="inline-flex shrink-0 rounded-full border border-slate-200 p-0.5">
+        <div className="inline-flex shrink-0 rounded-full border border-slate-200 p-0.5 dark:border-slate-700">
           {RANGE_OPTIONS.map((option) => (
             <button
               key={option.value}
@@ -85,7 +89,7 @@ export function ScreenTimeChart({ entries }: ScreenTimeChartProps) {
                 "rounded-full px-3 py-1 text-xs font-medium transition-colors",
                 mode === option.value
                   ? "bg-brand-600 text-white"
-                  : "text-slate-500 hover:text-slate-900"
+                  : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
               )}
             >
               {option.label}
@@ -120,11 +124,11 @@ export function ScreenTimeChart({ entries }: ScreenTimeChartProps) {
               const point = payload[0].payload as ChartRow;
               if (point.minutes === null) return null;
               return (
-                <div className="rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 shadow-card">
-                  <p className="mb-1 text-xs font-semibold text-slate-500">
+                <div className="rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 shadow-card dark:border-slate-700 dark:bg-slate-800">
+                  <p className="mb-1 text-xs font-semibold text-slate-500 dark:text-slate-400">
                     {formatFullDate(point.key)}
                   </p>
-                  <p className="tnum text-sm font-semibold text-slate-900">
+                  <p className="tnum text-sm font-semibold text-slate-900 dark:text-slate-100">
                     {formatMinutes(point.minutes)}
                   </p>
                 </div>

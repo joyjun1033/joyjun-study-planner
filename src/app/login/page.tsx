@@ -34,7 +34,7 @@ export default function LoginPage() {
           <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-600 text-base font-bold text-white">
             S
           </span>
-          <h1 className="text-lg font-bold text-slate-900">로그인</h1>
+          <h1 className="text-lg font-bold text-slate-900 dark:text-slate-100">로그인</h1>
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -67,14 +67,14 @@ export default function LoginPage() {
             />
           </div>
 
-          {error ? <p className="text-sm text-red-500">{error}</p> : null}
+          {error ? <p className="text-sm text-red-500 dark:text-red-400">{error}</p> : null}
 
           <button type="submit" className="btn-primary w-full justify-center" disabled={loading}>
             {loading ? "로그인 중..." : "로그인"}
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-slate-500">
+        <p className="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">
           계정이 없으신가요?{" "}
           <Link href="/signup" className="font-semibold text-brand-600 hover:underline">
             회원가입

@@ -24,7 +24,7 @@ export function GradeTable({ grades, onRemove }: GradeTableProps) {
   return (
     <table className="w-full text-sm">
       <thead>
-        <tr className="border-b border-slate-100 text-left text-xs font-medium text-slate-400">
+        <tr className="border-b border-slate-100 text-left text-xs font-medium text-slate-400 dark:border-slate-800 dark:text-slate-500">
           <th className="pb-3 pl-2 font-medium">날짜</th>
           <th className="pb-3 font-medium">시험</th>
           <th className="pb-3 font-medium">과목</th>
@@ -34,17 +34,24 @@ export function GradeTable({ grades, onRemove }: GradeTableProps) {
       </thead>
       <tbody>
         {grades.map((grade) => (
-          <tr key={grade.id} className="group border-b border-slate-50 last:border-0">
-            <td className="tnum py-3.5 pl-2 text-slate-500">{formatShortDate(grade.date)}</td>
-            <td className="py-3.5 font-medium text-slate-800">{grade.examName}</td>
+          <tr
+            key={grade.id}
+            className="group border-b border-slate-50 last:border-0 dark:border-slate-800"
+          >
+            <td className="tnum py-3.5 pl-2 text-slate-500 dark:text-slate-400">
+              {formatShortDate(grade.date)}
+            </td>
+            <td className="py-3.5 font-medium text-slate-800 dark:text-slate-200">
+              {grade.examName}
+            </td>
             <td className="py-3.5">
-              <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600">
+              <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
                 {grade.subject}
               </span>
             </td>
-            <td className="tnum py-3.5 text-right font-semibold text-slate-900">
+            <td className="tnum py-3.5 text-right font-semibold text-slate-900 dark:text-slate-100">
               {grade.value}
-              <span className="ml-0.5 text-xs font-medium text-slate-400">
+              <span className="ml-0.5 text-xs font-medium text-slate-400 dark:text-slate-500">
                 {grade.scoreType === "score" ? "점" : "등급"}
               </span>
             </td>
@@ -53,7 +60,7 @@ export function GradeTable({ grades, onRemove }: GradeTableProps) {
                 type="button"
                 aria-label="성적 삭제"
                 onClick={() => onRemove(grade.id)}
-                className="rounded-full p-1 text-slate-300 opacity-0 transition hover:bg-slate-100 hover:text-slate-500 focus:opacity-100 group-hover:opacity-100"
+                className="rounded-full p-1 text-slate-300 opacity-0 transition hover:bg-slate-100 hover:text-slate-500 focus:opacity-100 group-hover:opacity-100 dark:text-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-300"
               >
                 <X size={15} />
               </button>

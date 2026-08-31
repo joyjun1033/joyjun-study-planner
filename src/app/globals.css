@@ -8,7 +8,7 @@
   }
 
   body {
-    @apply bg-canvas text-slate-900;
+    @apply bg-canvas text-slate-900 dark:bg-slate-950 dark:text-slate-100;
   }
 
   /* 숫자 / 날짜는 살짝 굵고 폭이 고정되도록 */
@@ -19,7 +19,7 @@
 
 @layer components {
   .card {
-    @apply rounded-2xl border border-slate-200 bg-white shadow-card;
+    @apply rounded-2xl border border-slate-200 bg-white shadow-card dark:border-slate-800 dark:bg-slate-900;
   }
 
   .btn {
@@ -32,16 +32,19 @@
   }
 
   .btn-secondary {
-    @apply btn border border-slate-200 bg-white text-slate-700 hover:bg-slate-50;
+    @apply btn border border-slate-200 bg-white text-slate-700 hover:bg-slate-50
+           dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800;
   }
 
   .field {
     @apply w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-sm
            text-slate-900 placeholder:text-slate-400
-           focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-100;
+           focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-100
+           dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500
+           dark:focus:ring-brand-500/20;
   }
 
   .label {
-    @apply mb-1.5 block text-xs font-medium text-slate-500;
+    @apply mb-1.5 block text-xs font-medium text-slate-500 dark:text-slate-400;
   }
 }

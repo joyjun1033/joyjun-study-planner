@@ -87,7 +87,7 @@ export function GradeForm({ onAdd }: GradeFormProps) {
       <div className="mt-4 flex items-end gap-4">
         <div>
           <span className="label">기록 방식</span>
-          <div className="inline-flex rounded-full border border-slate-200 p-1">
+          <div className="inline-flex rounded-full border border-slate-200 p-1 dark:border-slate-700">
             {SCORE_TYPES.map((type) => (
               <button
                 key={type.value}
@@ -97,7 +97,7 @@ export function GradeForm({ onAdd }: GradeFormProps) {
                   "rounded-full px-4 py-1.5 text-sm font-medium transition-colors",
                   scoreType === type.value
                     ? "bg-brand-600 text-white"
-                    : "text-slate-500 hover:text-slate-900"
+                    : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
                 )}
               >
                 {type.label}
@@ -109,7 +109,7 @@ export function GradeForm({ onAdd }: GradeFormProps) {
         <div className="w-32">
           <label className="label" htmlFor="grade-value">
             {scoreType === "score" ? "점수" : "등급"}
-            <span className="ml-1 font-normal text-slate-400">
+            <span className="ml-1 font-normal text-slate-400 dark:text-slate-500">
               ({min} ~ {max})
             </span>
           </label>

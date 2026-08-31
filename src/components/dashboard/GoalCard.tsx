@@ -45,9 +45,9 @@ export function GoalCard({ label, icon: Icon, placeholder, value, onCommit }: Go
 
   return (
     <div className="card p-5 transition-colors focus-within:border-brand-300">
-      <div className="mb-3 flex items-center gap-2 text-slate-400">
+      <div className="mb-3 flex items-center gap-2 text-slate-400 dark:text-slate-500">
         <Icon size={16} strokeWidth={1.8} />
-        <span className="text-xs font-medium text-slate-500">{label}</span>
+        <span className="text-xs font-medium text-slate-500 dark:text-slate-400">{label}</span>
       </div>
       <textarea
         rows={2}
@@ -60,7 +60,8 @@ export function GoalCard({ label, icon: Icon, placeholder, value, onCommit }: Go
         }}
         onBlur={handleBlur}
         className="w-full resize-none border-0 bg-transparent p-0 text-[15px] font-semibold leading-relaxed
-                   text-slate-900 placeholder:font-normal placeholder:text-slate-300 focus:outline-none"
+                   text-slate-900 placeholder:font-normal placeholder:text-slate-300 focus:outline-none
+                   dark:text-slate-100 dark:placeholder:text-slate-600"
       />
     </div>
   );

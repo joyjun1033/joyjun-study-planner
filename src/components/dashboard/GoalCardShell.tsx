@@ -21,13 +21,13 @@ export function GoalCardShell({
 }: GoalCardShellProps) {
   return (
     <div className={cn("card flex flex-col p-5", className)}>
-      <div className="mb-3 flex items-center gap-2 text-slate-400">
+      <div className="mb-3 flex items-center gap-2 text-slate-400 dark:text-slate-500">
         <Icon size={16} strokeWidth={1.8} />
-        <span className="text-xs font-medium text-slate-500">{label}</span>
+        <span className="text-xs font-medium text-slate-500 dark:text-slate-400">{label}</span>
       </div>
       <div className="flex-1">{children}</div>
       {footer ? (
-        <div className="mt-4 border-t border-slate-100 pt-3">{footer}</div>
+        <div className="mt-4 border-t border-slate-100 pt-3 dark:border-slate-800">{footer}</div>
       ) : null}
     </div>
   );

@@ -19,18 +19,18 @@ export function DateNav({ dateKey, onChange }: DateNavProps) {
         type="button"
         aria-label="이전 날짜"
         onClick={() => onChange(addDays(dateKey, -1))}
-        className="rounded-full border border-slate-200 p-1.5 text-slate-500 transition-colors hover:bg-slate-50"
+        className="rounded-full border border-slate-200 p-1.5 text-slate-500 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-800"
       >
         <ChevronLeft size={16} />
       </button>
-      <span className="tnum min-w-[10.5rem] text-center text-sm font-semibold text-slate-700">
+      <span className="tnum min-w-[10.5rem] text-center text-sm font-semibold text-slate-700 dark:text-slate-200">
         {formatFullDate(dateKey)}
       </span>
       <button
         type="button"
         aria-label="다음 날짜"
         onClick={() => onChange(addDays(dateKey, 1))}
-        className="rounded-full border border-slate-200 p-1.5 text-slate-500 transition-colors hover:bg-slate-50"
+        className="rounded-full border border-slate-200 p-1.5 text-slate-500 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-800"
       >
         <ChevronRight size={16} />
       </button>
