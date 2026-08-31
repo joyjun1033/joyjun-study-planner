@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+
+  todos       Todo[]
+  goal        Goal?
+  events      ExamEvent[]
+  grades      Grade[]
+  habits      Habit[]
+  screenTimes ScreenTimeEntry[]
+}
+
+model Todo {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date      String
+  text      String
+  done      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId, date])
+}
+
+/** 사용자당 1행. weekTasks/monthTasks/monthScoreTargets는 클라이언트 타입 그대로 JSON 저장 */
+model Goal {
+  id                String @id @default(cuid())
+  userId            String @unique
+  user              User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  university        String @default("")
+  weekTasks         Json   @default("[]")
+  monthScoreTargets Json   @default("[]")
+  monthTasks        Json   @default("[]")
+  year              String @default("")
+}
+
+model ExamEvent {
+  id      String @id @default(cuid())
+  userId  String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date    String
+  title   String
+  subject String
+
+  @@index([userId, date])
+}
+
+model Grade {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  examName  String
+  subject   String
+  date      String
+  scoreType String
+  value     Float
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Habit {
+  id        String       @id @default(cuid())
+  userId    String
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String
+  createdAt DateTime     @default(now())
+  checks    HabitCheck[]
+
+  @@index([userId])
+}
+
+model HabitCheck {
+  id      String  @id @default(cuid())
+  habitId String
+  habit   Habit   @relation(fields: [habitId], references: [id], onDelete: Cascade)
+  date    String
+  checked Boolean @default(true)
+
+  @@unique([habitId, date])
+}
+
+model ScreenTimeEntry {
+  id      String @id @default(cuid())
+  userId  String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date    String
+  minutes Int
+
+  @@unique([userId, date])
+}
