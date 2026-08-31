@@ -13,7 +13,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { label: "비밀번호", type: "password" },
       },
       async authorize(credentials) {
-        const email = typeof credentials?.email === "string" ? credentials.email : "";
+        const email =
+          typeof credentials?.email === "string" ? credentials.email.trim().toLowerCase() : "";
         const password = typeof credentials?.password === "string" ? credentials.password : "";
         if (!email || !password) return null;
 
