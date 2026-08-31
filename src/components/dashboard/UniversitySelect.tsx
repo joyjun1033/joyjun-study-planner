@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Search, X } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { UNIVERSITIES } from "@/lib/universities";
+import { getUniversityLogoUrl } from "@/lib/universityLogos";
 
 interface UniversitySelectProps {
   value: string;
@@ -79,22 +80,38 @@ export function UniversitySelect({ value, onChange }: UniversitySelectProps) {
   }
 
   if (value) {
+    const logoUrl = getUniversityLogoUrl(value);
     return (
-      <div className="flex items-start gap-2">
-        <p className="flex-1 text-[15px] font-semibold leading-relaxed text-slate-900">
-          {value}
-        </p>
-        <button
-          type="button"
-          aria-label="목표 대학 선택 해제"
-          onClick={() => {
-            onChange("");
-            setQuery("");
-          }}
-          className="mt-0.5 shrink-0 rounded-full p-1 text-slate-300 transition-colors hover:bg-slate-100 hover:text-slate-500"
-        >
-          <X size={15} />
-        </button>
+      <div>
+        <div className="flex items-start gap-2">
+          <p className="flex-1 text-[15px] font-semibold leading-relaxed text-slate-900">
+            {value}
+          </p>
+          <button
+            type="button"
+            aria-label="목표 대학 선택 해제"
+            onClick={() => {
+              onChange("");
+              setQuery("");
+            }}
+            className="mt-0.5 shrink-0 rounded-full p-1 text-slate-300 transition-colors hover:bg-slate-100 hover:text-slate-500"
+          >
+            <X size={15} />
+          </button>
+        </div>
+        {logoUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={logoUrl}
+            alt={`${value} 로고`}
+            width={28}
+            height={28}
+            className="mt-2 h-7 w-7 rounded-md"
+            onError={(event) => {
+              event.currentTarget.style.display = "none";
+            }}
+          />
+        ) : null}
       </div>
     );
   }

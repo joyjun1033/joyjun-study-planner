@@ -7,7 +7,6 @@ import { HabitGrid } from "./HabitGrid";
 import { HabitMonthNav } from "./HabitMonthNav";
 import { HabitProgressChart } from "./HabitProgressChart";
 import { HabitSummaryCards } from "./HabitSummaryCards";
-import { HabitTopList } from "./HabitTopList";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { useHabits } from "@/hooks/useHabits";
 import { useToday } from "@/hooks/useToday";
@@ -96,11 +95,6 @@ export function HabitTrackerView() {
         <Card>
           <CardHeader title="Analysis" description="습관별 달성 현황" />
           <HabitAnalysisTable stats={stats.perHabitStats} />
-        </Card>
-
-        <Card>
-          <CardHeader title="Top Habits" description="달성률이 높은 습관" />
-          <HabitTopList stats={stats.perHabitStats} />
         </Card>
       </div>
     </div>

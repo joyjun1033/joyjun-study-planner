@@ -9,11 +9,10 @@ import { UniversitySelect } from "./UniversitySelect";
 import { useGoals } from "@/hooks/useGoals";
 
 export function GoalSection() {
-  const { goals, setUniversity, setYear, setWeekTasks, setMonthTasks, setScoreTargets } =
-    useGoals();
+  const { goals, setUniversity, setYear, setWeekTasks, setMonthTasks } = useGoals();
 
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 items-start gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <GoalCardShell label="목표 대학" icon={GraduationCap}>
         <UniversitySelect value={goals.university} onChange={setUniversity} />
       </GoalCardShell>
@@ -30,12 +29,7 @@ export function GoalSection() {
         />
       </GoalCardShell>
 
-      <MonthGoalCard
-        scoreTargets={goals.monthScoreTargets}
-        monthTasks={goals.monthTasks}
-        onScoreTargetsChange={setScoreTargets}
-        onMonthTasksChange={setMonthTasks}
-      />
+      <MonthGoalCard monthTasks={goals.monthTasks} onMonthTasksChange={setMonthTasks} />
 
       <GoalCard
         label="올해 목표"

@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { useEvents } from "@/hooks/useEvents";
+import { useGoals } from "@/hooks/useGoals";
 import { useToday } from "@/hooks/useToday";
 import { daysUntil } from "@/lib/date";
 
@@ -29,6 +30,7 @@ export function Sidebar() {
   const pathname = usePathname();
   const { data: session } = useSession();
   const { events } = useEvents();
+  const { goals } = useGoals();
   const today = useToday();
 
   const nextEvent = events
@@ -80,6 +82,12 @@ export function Sidebar() {
             </Link>
           );
         })}
+
+        {goals.year ? (
+          <p className="mt-4 px-3 text-xs leading-relaxed text-slate-400">
+            [올해 목표: {goals.year}]
+          </p>
+        ) : null}
       </nav>
 
       <div className="flex flex-col gap-1 border-t border-slate-100 pt-4">
@@ -96,13 +104,19 @@ export function Sidebar() {
             </div>
           </div>
         ) : null}
-        <button
-          type="button"
-          className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900"
+        <Link
+          href="/settings"
+          aria-current={pathname === "/settings" ? "page" : undefined}
+          className={cn(
+            "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors",
+            pathname === "/settings"
+              ? "bg-brand-50 font-semibold text-brand-700"
+              : "font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+          )}
         >
           <Settings size={18} strokeWidth={1.8} />
           설정
-        </button>
+        </Link>
         <button
           type="button"
           onClick={() => signOut({ callbackUrl: "/login" })}
